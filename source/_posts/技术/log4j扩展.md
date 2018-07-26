@@ -34,6 +34,8 @@ tags: [技术,后端,日志]
 
 ### 分别看下代码
 
+<!--more-->
+
 ##### DailyRollingFileAppender代码
 
 ```java
