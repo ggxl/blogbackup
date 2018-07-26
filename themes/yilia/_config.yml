@@ -3,6 +3,7 @@
 menu:
   主页: /
   相册: /photos/
+  功能页面: /FunctionPage/
 
 # SubNav
 subnav:
