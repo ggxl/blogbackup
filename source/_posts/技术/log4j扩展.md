@@ -1,7 +1,7 @@
 ---
 title: log4j日志扩展实现log文件同时按日期和大小切分
 no_word_count: false
-tags: [技术,后端,日志]
+tags: [技术,后端,log4j]
 ---
 
 
