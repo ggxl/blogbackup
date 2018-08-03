@@ -1,4 +1,5 @@
 ---
+date: 2018-8-1 15:45:28
 title: log4j2介绍和应用
 no_word_count: false
 tags: [技术,后端,log4j2]
@@ -41,7 +42,7 @@ tags: [技术,后端,log4j2]
 > #### 属性支持
 > 您可以在配置中引用属性，Log4j将直接替换它们，或者Log4j将它们传递给将动态解析它们的底层组件。属性来自配置文件，系统属性，环境变量，ThreadContext Map以及事件中存在的数据中定义的值。用户可以通过添加自己的Lookup插件来进一步自定义属性提供程序。
 
-> #### Java 8 Lambda支持
+> ##### Java 8 Lambda支持
 > 以前，如果构造日志消息的代价很高，您通常会在构造消息之前显式检查是否启用了请求的日志级别。在Java 8上运行的客户端代码可以从Log4j的lambda支持中受益。如果未启用请求的日志级别，Log4j将不会评估lambda表达式，因此可以使用更少的代码实现相同的效果
 
 > #### 自定义日志级别
@@ -122,7 +123,7 @@ tags: [技术,后端,log4j2]
 
 
 >### 配置文件
->#### log4j2.xml ，名字要注意不要起错了这个加了2
+>##### log4j2.xml ，名字要注意不要起错了这个加了2
 
 ```XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -240,7 +241,7 @@ SLF4J: Found binding in [jar:file:.m2/repository/org/apache/logging/log4j/log4j-
 
 ```
 
-#### 在相关依赖下排除log4j的依赖包
+##### 在相关依赖下排除log4j的依赖包
 
 ```XML
 
@@ -258,7 +259,7 @@ SLF4J: Found binding in [jar:file:.m2/repository/org/apache/logging/log4j/log4j-
 </exclusions>
 ````
 
-#### 巴特，有太多包依赖了log4j，一个一个排除实在不麻烦也不好找。在网上查了下全局排除的方法。
+##### 巴特，有太多包依赖了log4j，一个一个排除实在不麻烦也不好找。在网上查了下全局排除的方法。
 >maven在解析依赖的时候，有两个原则
 >
 >- 第一原则是路径最短有限原则，例如A-->B-->C-1.0(A依赖B，B依赖C的1.0版本)，同时A-->D-->E-->C-2.0，那么从A来看，最终会依赖C的1.0版本进来，因为路径最短，最可信，这个例子也推翻了“高版本覆盖低版本”的错误言论。
@@ -266,8 +267,8 @@ SLF4J: Found binding in [jar:file:.m2/repository/org/apache/logging/log4j/log4j-
 
 ```XML
 <!--
-试了插件无效，最后没办法了，随便给个不存在的包 让那些自动依赖的第三方包找不到log4j12
-同归于尽，不过有点担心这样暴力解决到了生产环境会不会有什么问题
+试了插件无效，也不能改仓库，最后没办法了，随便给个不存在的包 让那些自动依赖的第三方包找不到log4j12
+同归于尽，先跑起来试用下再说。
 -->
 <dependency>
 	<groupId>org.slf4j</groupId>
@@ -277,7 +278,7 @@ SLF4J: Found binding in [jar:file:.m2/repository/org/apache/logging/log4j/log4j-
 	<systemPath>${project.basedir}/lib/not-exist-empty.jar</systemPath>
 </dependency>
 ```
-#### 虽然idea maven报红，试了下冲突没了，但是很多日志也没了。。。
+##### 虽然idea maven报红，试了下冲突没了，但是很多日志也没了。。。
 
 ### 首先dubbo的日志
 
@@ -285,7 +286,7 @@ SLF4J: Found binding in [jar:file:.m2/repository/org/apache/logging/log4j/log4j-
 >log4j:WARN No appenders could be found for logger (com.alibaba.dubbo.common.logger.LoggerFactory).
 >log4j:WARN Please initialize the log4j system properly.
 
-#### 看下源码
+##### 看下LoggerFactory的源码
 ```java
 // 查找常用的日志框架
 	static {
@@ -342,6 +343,7 @@ Main.main(args);
 >6. 如果使用log4j2获取logger则使用`LogManager.getLogger()`方式
 >7. log4j2的包名`org.apache.logging.log4j`，log4j1.x的报名不带logging
 >8. 大部分内容都是复制了官网的介绍，没太注意排版，看起来有点乱，全当个手册吧。
+>9. <font color="red">遗留问题:如何全局去除log4j的依赖</font>
 
 
 
